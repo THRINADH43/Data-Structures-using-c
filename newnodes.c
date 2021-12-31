@@ -86,40 +86,39 @@ struct node* deletestart(struct node *l)
         return new;
 }
 struct node* deleteatvalue(struct node *l, int value)
-{  // Error in performing this do again.
-     int to_set=0;
-	 struct node *l1;
-	 // struct node *previous;
-	 l1=l;
-	 struct node *temp;
-	 while (l!=NULL)
-	 {
- 	     if (l->data==value)
-		  {
-  			 to_set=1;
-  			 break;
+{
+  // Error in performing this do again.
+	int to_set=0;
+	struct node *l1=l;
+	struct node *temp,*pre;
+	if(l->data==value)
+	{
+		printf("Deleted element %d",l->data);
+		l=l->next;
+		return l;
+	}
+	
+	while (l!=NULL)
+	{
+ 		if (l->data==value)
+		{
+  			to_set=1;
+	 		break;
   		 }
+  		 pre=l;
 		 l=l->next;	
  	 }
-	 while (to_set==1)
-	 {
- 		if (l->next->data==value)   // Finding Whether the value matches to the required value a head of that node.
-		
- 		{
-		 	printf("Deleting the node: %d",value);
-		 	temp = l->next;
-		 	l->next=l->next->next;
-		 	//to_set=1;
-		 	break;
-		 }
-		 l=l->next;
- 	}
- 	if (to_set==0)
+  	if (to_set==0)
  	{
-	   printf("Element not found and nodes are not altered \n"); 	
+	   printf("Element not found and nodes are not altered \n"); 
+	   return l;	
     }
-	return l1;	
-	
+    else
+    {
+    	pre->next=l->next;
+    	return l1;
+    }
+	 	
 }
 struct node *deleteatposition(struct node *l1,int pos)
 {
@@ -273,16 +272,71 @@ struct node *Insertatposition(struct node *l1,int pos, int x)
 	}
 	return l2;
 }
+int find(struct node *l,int element)
+{
+	int i,c,to_set=0;
+	c=count(l);
+	for (i=0;i<c;i++)
+	{
+		if (l->data==element)
+		{
+			to_set=1;
+			return i+1;
+		}
+		l=l->next;
+	}
+	if (to_set==0)
+	{
+		printf("Cannot find the element: \n");
+		return 0;
+	}
+	
+}
+/*struct node* reverse(struct node *l)
+{
+	struct node *reverse,*temp;
+	int value1,value2,to_set=0;
+	while (l!=NULL)
+	{
+		value1=l->data;
+		l=l->next;
+	}
+	while (to_set==1)
+	{
+		if (l->data==value1)
+		{
+			reverse=create(l->data);
+			temp=l->data;
+			value1=
+		}
+	}
+}*/
+struct node* concatenate(struct node *l,struct node *l2)
+{
+	struct node *temp;
+	temp=l;
+	while (l!=NULL)
+	{
+		if (l->next==NULL)
+		{
+			l->next=l2;
+			return temp;
+		}
+		l=l->next;
+	}
+	
+}
 int main()
 {
     struct node *l;
     struct node *l1;
     struct node *l2;
+	struct node *l3;
 	int pos;
 	int n,x,element,value,c;
 	do 
 	{
-		printf("Choose from the below options: \n");
+		printf("\n-----------MENU--------------\n");
 		printf("1. To create \n");
 		printf("2. To display \n");
 		printf("3. To exit \n");
@@ -296,7 +350,10 @@ int main()
 		printf("11. To konw the total count: \n");
 		printf("12. To find the prevous \n");
 		printf("13. Insert at a position \n");
-		printf("14.Delete at a position: \n");
+		printf("14. Delete at a position: \n");
+		printf("15. To find an element: \n");
+		printf("16. To concatenate \n");
+		printf("Enter your choice: ");
 		scanf("%d",&x);
 		switch (x)
 		{
@@ -383,7 +440,22 @@ int main()
 					  l=deleteatposition(l,pos);
 					  printf("After deleting: \n");
 					  display(l);
-					  break;			                    
+					  break;
+			case 15:  printf("Enter the element to find: ");
+			          scanf("%d",&element);
+					  value=find(l,element);
+					  printf("Location: %d",value);
+					  break;
+			case 16: printf("About to Concatenate: \n");
+		             printf("Creating a list: \n");
+                     printf("Enter total nodes: ");
+                     scanf("%d",&n);
+                     l2=creatennodes(n);
+                     l3=concatenate(l,l2);
+                     printf("After concatenation: \n");
+                     display(l3);
+                     break;
+					 			         			                    
 		} 
 		
 	} while (x<20);
