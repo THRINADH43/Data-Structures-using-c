@@ -1,0 +1,5 @@
+https://journey2theccie.wordpress.com/category/devasc-200-901/1-0-software-development-and-design/
+
+https://journey2theccie.wordpress.com/2020/02/28/devnet-associate-1-1-compare-data-formats-xml-json-yaml/
+
+https://journey2theccie.wordpress.com/2020/03/04/devnet-associate-2-5-troubleshoot-a-problem-given-the-http-response-code-request-and-api-documentation/
